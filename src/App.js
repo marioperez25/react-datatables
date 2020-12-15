@@ -1,5 +1,18 @@
 import './App.css'
+import React from 'react'
+import $ from 'jquery'
+import dt from 'datatables.net'
 import { species } from './species'
+
+const datatableConfig = {
+  "scrollY": 400,
+  "scrollX": true,
+  "searching": true,
+  "paging": false,
+  "bInfo": false,
+  "ordering": true,
+  "sDom": 'lrtip',
+}
 
 function getKeys(jsonCollection) {
   const allKeys = jsonCollection.map(
@@ -10,7 +23,7 @@ function getKeys(jsonCollection) {
 }
 
 function buildRow(item,keys){
-  const rowContent = keys.map( key => <td> {item[key]}</td>)
+  const rowContent = keys.map(key => <td > {item[key]}</td>)
   return <tr>
     {rowContent}
   </tr>
@@ -19,10 +32,14 @@ function buildRow(item,keys){
 function App() {
 
   const tableHeadings = getKeys(species);
+
+  React.useEffect( ()=>{
+    dt.$('#datatable').DataTable(datatableConfig)
+  } , [])
   
   return (
-    <div>
-      <table>
+    <>
+      <table id='datatable'>
       <thead>
         <tr>
           { tableHeadings.map(item => (<th>{item}</th>)) }
@@ -32,7 +49,7 @@ function App() {
           { species.map(item => buildRow(item,tableHeadings))}
       </tbody>
       </table>
-    </div>
+    </>
   )
 }
 export default App;
