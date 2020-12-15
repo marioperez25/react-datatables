@@ -6,11 +6,13 @@ import dt from 'datatables.net'
 
 function Datatable(props) {
   const {
-    config,
+    config = {},
     data
   } = props
   const headings = getKeys(data);
   const tableRef = React.createRef();
+  const tableHeadings = headings.map(item => (<th>{item}</th>))
+  const tableBody = data.map(item => buildRow(item,headings))
 
   React.useEffect(() => {
     const node = tableRef.current
@@ -22,11 +24,11 @@ function Datatable(props) {
       <table ref={tableRef}>
       <thead>
         <tr>
-          { headings.map(item => (<th>{item}</th>)) }
+          {tableHeadings}
         </tr>
       </thead>
       <tbody>
-          { data.map(item => buildRow(item,headings)) }
+          {tableBody}
       </tbody>
       </table>
     </>

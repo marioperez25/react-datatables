@@ -4,7 +4,7 @@ import Datatable from './Datatable'
 import { species } from './species'
 
 const config1 = {
-  "scrollY": 400,
+  "scrollY": 200,
   "scrollX": true,
   "searching": true,
   "paging": false,
@@ -21,8 +21,8 @@ function App() {
         config={config1}
         data={species}
       />
+      <hr></hr>
       <Datatable
-        config={config1}
         data={species}
       />
     </>
