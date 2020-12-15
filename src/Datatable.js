@@ -1,4 +1,3 @@
-import './App.css'
 import React from 'react'
 // eslint-disable-next-line no-unused-vars
 import $ from 'jquery'
@@ -10,18 +9,18 @@ function Datatable(props) {
     data
   } = props
   const headings = getKeys(data);
-  const tableRef = React.createRef();
+  const table = React.createRef();
   const tableHeadings = headings.map(item => (<th>{item}</th>))
   const tableBody = data.map(item => buildRow(item,headings))
 
   React.useEffect(() => {
-    const node = tableRef.current
+    const node = table.current
     dt.$(node).DataTable(config)
-  }, [config, tableRef])
+  }, [config, table])
   
   return (
     <>
-      <table ref={tableRef}>
+      <table ref={table}>
       <thead>
         <tr>
           {tableHeadings}
