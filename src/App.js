@@ -1,5 +1,6 @@
 import './App.css'
 import React from 'react'
+// eslint-disable-next-line no-unused-vars
 import $ from 'jquery'
 import dt from 'datatables.net'
 import { species } from './species'
@@ -14,26 +15,29 @@ const datatableConfig = {
   "sDom": 'lrtip',
 }
 
-function getKeys(jsonCollection) {
-  const allKeys = jsonCollection.map(
-    singleSpecies => Object.keys(singleSpecies)
+function getKeys(arraysOfJsons) {
+  const allKeys = arraysOfJsons.map(
+    json => Object.keys(json)
   )
-  let uniqueKeys = [...new Set([].concat(...allKeys))];
+  const uniqueKeys = [...new Set([].concat(...allKeys))];
   return uniqueKeys
 }
 
 function buildRow(item,keys){
-  const rowContent = keys.map(key => <td > {item[key]}</td>)
+  const rowContent = keys.map(
+    key => <td>{item[key]}</td>
+  )
   return <tr>
     {rowContent}
   </tr>
 }
 
 function App() {
-
+  console.log('rendering app')
   const tableHeadings = getKeys(species);
 
   React.useEffect( ()=>{
+    console.log('using effect')
     dt.$('#datatable').DataTable(datatableConfig)
   } , [])
   
