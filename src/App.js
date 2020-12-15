@@ -2,17 +2,14 @@ import './App.css'
 import { species } from './species'
 
 function getKeys(jsonCollection) {
-  const allObjectsKeys = jsonCollection.map(
+  const allKeys = jsonCollection.map(
     singleSpecies => Object.keys(singleSpecies)
   )
-  let uniqueKeys = [...new Set([].concat(...allObjectsKeys))];
-  console.log(uniqueKeys)
+  let uniqueKeys = [...new Set([].concat(...allKeys))];
   return uniqueKeys
 }
 
-function tableBodyRow(item,keys){
-  console.log(item)
-  console.log(keys)
+function buildRow(item,keys){
   const rowContent = keys.map( key => <td> {item[key]}</td>)
   return <tr>
     {rowContent}
@@ -32,11 +29,10 @@ function App() {
         </tr>
       </thead>
       <tbody>
-          { species.map(item => tableBodyRow(item,tableHeadings))}
+          { species.map(item => buildRow(item,tableHeadings))}
       </tbody>
       </table>
     </div>
-    
-    )
-  }
+  )
+}
 export default App;
