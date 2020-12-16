@@ -8,10 +8,17 @@ function Datatable(props) {
     config = {},
     data
   } = props
-  const headings = getKeys(data);
-  const table = React.createRef();
-  const tableHeadings = headings.map(item => (<th>{item}</th>))
-  const tableBody = data.map(item => buildRow(item,headings))
+
+  const headings = getKeys(data)
+  const table = React.createRef()
+
+  const tableHeadings = headings.map(
+    item => (<th>{item}</th>)
+  )
+  
+  const tableBody = data.map(
+    item => buildRow(item,headings)
+  )
 
   React.useEffect(() => {
     const node = table.current
@@ -20,15 +27,17 @@ function Datatable(props) {
   
   return (
     <>
-      <table ref={table}>
-      <thead>
-        <tr>
-          {tableHeadings}
-        </tr>
-      </thead>
-      <tbody>
-          {tableBody}
-      </tbody>
+      <table
+        ref={table}
+      >
+        <thead>
+          <tr>
+            {tableHeadings}
+          </tr>
+        </thead>
+        <tbody>
+            {tableBody}
+        </tbody>
       </table>
     </>
   )
